@@ -1,0 +1,30 @@
+name: Label Approved
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  label-approved:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: docker://tiangolo/label-approved:0.0.2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        config: >
+          {
+            "approved-1":
+              {
+                "number": 1,
+                "await_label": "awaiting review"
+              },
+            "omg 2 approved":
+              {
+                "number": 2,
+                "await_label": "only 2"
+              },
+            "approvals in 3D":
+              {
+                "number": 3
+              }
+          }
